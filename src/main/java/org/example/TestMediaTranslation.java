@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 
 public class TestMediaTranslation {
     public static void useGRPCTransport(String filePath) throws IOException {
+        System.out.println("Calling useGRPCTransport() in TestMediaTranslation");
         try (SpeechTranslationServiceClient speechTranslationServiceClient = SpeechTranslationServiceClient.create()) {
             Path path = Paths.get(filePath);
             byte[] content = Files.readAllBytes(path);
@@ -43,10 +44,13 @@ public class TestMediaTranslation {
 
             bidiStream.send(requestConfig);
             bidiStream.send(request);
+
+            System.out.println("Done useGRPCTransport() in TestMediaTranslation");
         }
     }
 
     public static void useRESTTransport(String filePath) throws IOException {
+        System.out.println("Calling useRESTTransport() in TestMediaTranslation");
         SpeechTranslationServiceSettings speechTranslationServiceSettings = SpeechTranslationServiceSettings.newHttpJsonBuilder().build();
         try (SpeechTranslationServiceClient speechTranslationServiceClient = SpeechTranslationServiceClient.create(speechTranslationServiceSettings)) {
             Path path = Paths.get(filePath);
@@ -80,6 +84,8 @@ public class TestMediaTranslation {
 
             bidiStream.send(requestConfig);
             bidiStream.send(request);
+
+            System.out.println("Done useRESTTransport() in TestMediaTranslation");
         }
     }
 }
